@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Flight extends Model
 {
@@ -29,6 +30,18 @@ class Flight extends Model
         'arrival_time' => 'datetime',
         'price' => 'decimal:2',
     ];
+
+    public function scopeFilter(Builder $query, $search)
+    {
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('flight_number', 'like', "%{$search}%")
+                  ->orWhere('airline', 'like', "%{$search}%")
+                  ->orWhere('departure_airport', 'like', "%{$search}%")
+                  ->orWhere('arrival_airport', 'like', "%{$search}%");
+            });
+        }
+    }
 
     public function bookings()
     {
