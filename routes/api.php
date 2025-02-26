@@ -49,3 +49,11 @@ Route::prefix('flight')->middleware('auth:sanctum')->group(function () {
     // Cancel a flight booking
     Route::put('{booking}/cancel', [BookingController::class, 'cancelFlight']);
 });
+
+Route::prefix('hotel')->middleware('auth:sanctum')->group(function () {
+    // Store a new hotel booking
+    Route::post('/book', [BookingController::class, 'bookHotel']);
+
+    // Cancel a hotel booking
+    Route::put('{booking}/cancel', [BookingController::class, 'cancelHotelBooking']);
+});
