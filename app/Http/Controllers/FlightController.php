@@ -19,18 +19,7 @@ class FlightController extends Controller
     public function index(Request $request)
     {
         try {
-            $flights = Flight::filter($request->search)
-                ->when($request->has('status'), function ($query) use ($request) {
-                    return $query->where('status', $request->status);
-                })
-                ->when($request->has('departure_from') && $request->has('departure_to'), function ($query) use ($request) {
-                    return $query->whereBetween('departure_time', [
-                        $request->departure_from, $request->departure_to,
-                    ]);
-                })
-                ->when($request->has('available_seats_min'), function ($query) use ($request) {
-                    return $query->where('available_seats', '>=', $request->available_seats_min);
-                })
+            $flights = Flight::filter(request('search'))
                 ->latest('created_at')
                 ->paginate(10);
 
