@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('available_seats')->index();
             $table->decimal('price', 10, 2);
             $table->enum('status', ['scheduled', 'delayed', 'cancelled'])->default('scheduled');
+            $table->enum('flight_type', ['oneway', 'rounded'])->default('oneway');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
