@@ -23,6 +23,7 @@ class Flight extends Model
         'available_seats',
         'price',
         'status',
+        'image'
     ];
 
     protected $casts = [
@@ -35,8 +36,9 @@ class Flight extends Model
     {
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->where('flight_number', 'like', "%{$search}%")
-                  ->orWhere('airline', 'like', "%{$search}%")
+                $q->where('departure_time', 'like', "%{$search}%")
+                  ->orWhere('arrival_time', 'like', "%{$search}%")
+                  ->orWhere('total_seats', 'like', "%{$search}%")
                   ->orWhere('departure_airport', 'like', "%{$search}%")
                   ->orWhere('arrival_airport', 'like', "%{$search}%");
             });
