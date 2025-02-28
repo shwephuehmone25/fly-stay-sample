@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('total_rooms');
             $table->integer('remaining_rooms');
             $table->decimal('rating', 3, 2)->default(0);
+            $table->string('image')->nullable();
+            $table->decimal('price', 10, 2)->unsigned();
             $table->timestamps();
         });
     }

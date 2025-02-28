@@ -18,10 +18,12 @@ class Hotel extends Model
         'total_rooms',
         'remaining_rooms',
         'rating',
+        'price',
     ];
 
     protected $casts = [
         'rating' => 'decimal:2',
+        'price' => 'decimal:2',
     ];
 
     public function bookings()
