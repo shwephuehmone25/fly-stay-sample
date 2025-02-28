@@ -12,7 +12,7 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 });
 
-Route::prefix('flights')->middleware('auth:sanctum')->group(function () {
+Route::prefix('flights')->group(function () {
     Route::get('/', [FlightController::class, 'index']);
     Route::get('{flight}', [FlightController::class, 'show']);
     Route::post('/', [FlightController::class, 'store']);
